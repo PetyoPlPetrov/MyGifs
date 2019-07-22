@@ -1,6 +1,6 @@
 # MyGifs
 
-This repository will present giff search application.
+This repository will present giff search application. The boilerplate is create-react-app.
 
 ## Setting up the project
 
@@ -42,10 +42,14 @@ Must be one of the following:
 
 - **feat**: A new feature
 - **refactor**: A code change that neither fixes a bug nor adds a feature
-- **perf**: A code change that improves performance
 - **test**: Adding missing or correcting existing tests
 
-
+##Documentation
+    Type in the input field and press search button. When you scroll to the bottom a a text with loading purpose will
+signal the new giffs are loading. There is a 3secs additional delay on top of the async request in order to enjoy
+the "loader"
+    Currents bugs: since the default limit of giffs the app show is 8, if the giffs are small
+ the scroll will not show. Just press Search button again to load diffrent giffs.
 ## Authors
 
 - **Petyo Petrov**

@@ -5,7 +5,6 @@ import {
     SET_GIFS
 } from '../constants'
 
-
 export const handleCommand = (command )=> (state,props) => {
     const computed = plugins.reduce(
         (nextState, plugin) =>
@@ -23,6 +22,7 @@ export const createSetSearchedGifsCommand = (args) => ({
     commandName: SET_GIFS,
     args
 })
+
 export const createResetGifsCommand = () => ({
     commandName: RESET_GIFS,
 })
@@ -31,6 +31,7 @@ export const createInputChangeCommand = (args) => ({
     commandName: INPUT_CHANGE,
     args
 })
+
 export const createParamsCommand = commandName=> (args) => ({
     commandName,
     args
