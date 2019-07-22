@@ -8,6 +8,7 @@ import {
 const mapUrlToGifs = ({urls,...rest})=>({
     ...rest,urls: urls.map(e => ({title: e.title,url: e.images.preview_gif.url}))
 })
+
 const propsModifiers = [mapUrlToGifs]
 
 export const AddGifs = {
@@ -25,9 +26,10 @@ export const AddGifs = {
             case RESET_GIFS: {
                 return {...state, urls: []}
             }
-
+            default :{
+                return state
+            }
         }
-        return state
     },
 
     transformStateProps: (props) =>

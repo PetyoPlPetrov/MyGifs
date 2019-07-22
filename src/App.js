@@ -1,4 +1,5 @@
 import React from 'react';
+import {isEmpty} from 'ramda'
 import {
     LOADING,
     SET_OFFSET
@@ -38,8 +39,8 @@ class App extends  React.Component{
     }
 
     handleScroll = async ()=>{
-        const bottom = this.container.current.getBoundingClientRect().bottom <= window.innerHeight
-        if(bottom){
+        const isScrolledtoTheBottom = this.container.current.getBoundingClientRect().bottom <= window.innerHeight
+        if(isScrolledtoTheBottom){
              await this.searchGifs()
         }
     }
@@ -71,12 +72,12 @@ class App extends  React.Component{
     }
 
     render(){
-        const { urls, loading} = processProps(this.state)
+        const { urls, loading, searchedGif} = processProps(this.state)
         return(
             <div style={{paddingLeft:200,paddingTop:100}} ref={this.container}>
-            <Input placeholder='Type gif...' onChange={this.onInputChange} value={this.state.searchedGif}/>
-            <button onClick={this.onStartSearchClick}>Search</button>
-             <Gif urls={urls} isLoading={loading}/>
+            <Input placeholder='Search for giffs...' onChange={this.onInputChange} value={searchedGif}/>
+            <button onClick={this.onStartSearchClick} disabled={isEmpty(searchedGif)}>Search</button>
+            <Gif urls={urls} isLoading={loading}/>
         </div>)
     }
 }

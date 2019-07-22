@@ -7,8 +7,9 @@ export const getGifs =  ({query, offset, limit}) => fetchGifs({query, offset, li
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-export const loadGifs = async ({query,offset, limit}) => {
-    const gifs = await getGifs({query: query|| 'dogs',limit, offset})
+
+export const loadGifs = async ({ query, offset, limit}) => {
+    const gifs = await getGifs({query: query, limit, offset})
     const {data} = await gifs.json()
     await sleep(3000)
     return data
