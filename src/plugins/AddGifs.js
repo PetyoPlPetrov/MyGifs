@@ -1,7 +1,12 @@
-import { SET_GIFS } from '../constants/'
+import {
+    LOADING,
+    RESET_GIFS,
+    SET_GIFS,
+    SET_OFFSET
+} from '../constants/'
 
-const mapUrlToGifs = ({urls})=>({
-    urls: urls.map(e => ({title: e.title,url: e.images.preview_gif.url}))
+const mapUrlToGifs = ({urls,...rest})=>({
+    ...rest,urls: urls.map(e => ({title: e.title,url: e.images.preview_gif.url}))
 })
 const propsModifiers = [mapUrlToGifs]
 
@@ -9,13 +14,23 @@ export const AddGifs = {
     handleCommand: ({ command, state, }) => {
         switch (command.commandName) {
             case SET_GIFS: {
-                return {...state, urls: command.args}
+                return {...state, urls: state.urls.concat(command.args)}
             }
+            case SET_OFFSET: {
+                return {...state, offset: command.args}
+            }
+            case LOADING: {
+                return {...state, loading: command.args}
+            }
+            case RESET_GIFS: {
+                return {...state, urls: []}
+            }
+
         }
         return state
     },
 
-    transformProps: (props) =>
+    transformStateProps: (props) =>
         propsModifiers.reduce((p, modifier) => modifier(p), props),
 }
 

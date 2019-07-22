@@ -1,36 +1,65 @@
 import React from 'react';
-import { SET_GIFS, INPUT_CHANGE } from './constants/'
 import {
+    LOADING,
+    SET_OFFSET
+} from './constants/'
+import {
+    createInputChangeCommand,
+    createParamsCommand,
     handleCommand,
-    processProps
+    processProps,
+    createSetSearchedGifsCommand,
+    createResetGifsCommand
 } from './common/'
 import { Input} from './components/Input'
 import { loadGifs } from './fetch'
-import { Gif } from './components/Gif'
+import Gif from './components/Gif'
 
-export const setSearchedGifs = (args) => ({
-    commandName: SET_GIFS,
-    args
-})
-
-export const createInputChangeCommand = (args) => ({
-    commandName: INPUT_CHANGE,
-    args
-})
 
 class App extends  React.Component{
+
     constructor(props){
         super(props)
         this.state={
             searchedGif: '',
-            urls: []
+            urls: [],
+            offset:1,
+            limit:8
+        }
+        this.container =  React.createRef();
+    }
+
+    componentDidMount() {
+        document.addEventListener('scroll', this.handleScroll);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll = async ()=>{
+        const bottom = this.container.current.getBoundingClientRect().bottom <= window.innerHeight
+        if(bottom){
+             await this.searchGifs()
         }
     }
 
+    onStartSearchClick = async ()=>{
+        this.dispatchCommand(createResetGifsCommand())
+        await this.searchGifs()
+    }
+
     searchGifs = async () => {
-        const value = this.state.searchedGif
-        const urls = await loadGifs(value)
-        this.dispatchCommand(setSearchedGifs(urls))
+        //TODO compose them with ramda
+        const {searchedGif, offset,limit, loading} = this.state
+        if(loading){
+            return
+        }
+        this.dispatchCommand(createParamsCommand(LOADING)(true))
+        const urls = await loadGifs({query:searchedGif, limit, offset})
+        this.dispatchCommand(createParamsCommand(SET_OFFSET)(offset+ limit))
+        this.dispatchCommand(createParamsCommand(LOADING)(false))
+        this.dispatchCommand(createSetSearchedGifsCommand(urls))
     }
 
     dispatchCommand = (command) => {
@@ -42,14 +71,14 @@ class App extends  React.Component{
     }
 
     render(){
-        const { urls} = processProps(this.state)
+        const { urls, loading} = processProps(this.state)
         return(
-            <div style={{paddingLeft:200,paddingTop:100}}>
+            <div style={{paddingLeft:200,paddingTop:100}} ref={this.container}>
             <Input placeholder='Type gif...' onChange={this.onInputChange} value={this.state.searchedGif}/>
-            <button onClick={this.searchGifs}>Search</button>
-             <Gif urls={urls}/>
+            <button onClick={this.onStartSearchClick}>Search</button>
+             <Gif urls={urls} isLoading={loading}/>
         </div>)
     }
-
 }
+
 export default App;

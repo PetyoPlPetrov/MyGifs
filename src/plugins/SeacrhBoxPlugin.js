@@ -5,8 +5,7 @@ import {
 const propsModifiers = []
 
 export const SearchBoxPlugin = {
-    handleCommand: (e) => {
-        const { command: {commandName, args}, state,props } = e
+    handleCommand: ( { command: {commandName, args}, state } ) => {
         switch (commandName) {
             case INPUT_CHANGE: {
                 console.log(2)
@@ -15,7 +14,6 @@ export const SearchBoxPlugin = {
         }
         return state
     },
-
-    transformProps: (props) =>
+    transformStateProps: (props) =>
         propsModifiers.reduce((p, modifier) => modifier(p), props),
 }
