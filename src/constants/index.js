@@ -1,0 +1,5 @@
+export const SET_GIFS = 'SET_GIFS'
+export const SET_OFFSET = 'SET_OFFSET'
+export const RESET_GIFS = 'RESET_GIFS'
+export const LOADING = 'LOADING'
+export const INPUT_CHANGE = 'INPUT_CHANGE'
