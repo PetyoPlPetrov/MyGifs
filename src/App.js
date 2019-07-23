@@ -16,7 +16,6 @@ import { Input} from './components/Input'
 import { loadGifs } from './fetch'
 import Gif from './components/Gif'
 
-
 class App extends  React.Component{
 
     constructor(props){
