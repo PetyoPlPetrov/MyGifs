@@ -1,7 +1,7 @@
 import React from 'react';
-import { withLoader } from '../components/withLoader'
+import {withLoader} from '../components/withLoader'
 
-const Layout = ({classname,children, ...rest})=>{
+const Layout = ({classname, children, ...rest}) => {
     return <div className={classname} {...rest}>
         {children}
     </div>

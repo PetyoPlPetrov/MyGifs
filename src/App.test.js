@@ -8,7 +8,7 @@ import { INPUT_CHANGE } from './constants'
 import Gif from './components/Gif'
 
 configure({ adapter: new Adapter() })
-const props = { urls: [{ images: { preview_gif: { url: 'myGif', title: 'title' } } }] }
+const props = { urls: [{ images: { preview_gif: { url: 'myGiff1', title: 'title' } } }] }
 
 describe('test layout changing commands', () => {
     it('renders without crashing', () => {
@@ -18,7 +18,7 @@ describe('test layout changing commands', () => {
     })
 
     it('should call createInputChangeCommand when typing in search box', () => {
-        const app = mount(<App/>)
+        const app = mount(<App />)
         app.setState({ urls: props.urls })
         const args = { 'args': 'dog', 'commandName': INPUT_CHANGE }
         const dispatchSpy = jest.spyOn(app.instance(), 'dispatchCommand')
@@ -29,14 +29,14 @@ describe('test layout changing commands', () => {
     it('should change layout when toggle the column btn', () => {
         const app = mount(<App {...props} />)
         app.setState({ urls: props.urls })
-        app.find('.toggle-test').simulate('click')
+        app.find('.toggle-test').at(1).simulate('click')
         expect(app.find('.threeColumnsContainer').length).toBe(1)
     })
 })
 
 describe('test Gif component', () => {
     it('should render giffs', () => {
-        const wrapper = mount(<Gif {...props}/>)
+        const wrapper = mount(<Gif urls={[{url: 'some url', title: 'someTitle'}]}/>)
         expect(wrapper.find('.gif').length).toBe(1)
     })
 })

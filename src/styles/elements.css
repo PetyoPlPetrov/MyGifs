@@ -1,0 +1,11 @@
+body{
+    overflow-y:scroll;
+}
+
+.element{
+    margin-left: 35%;
+    margin-top: 5%;
+}
+.app-name{
+    margin: 5px;
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { isEmpty } from 'ramda'
+
 import {
     LOADING,
     SET_OFFSET
@@ -14,13 +14,13 @@ import {
     createToggleColumnSCommand,
     toggleLayoutColumnClass
 } from './common/'
-import { Input } from './components/Input'
 import {
     loadGifs,
     sleep
 } from './fetch'
 import Gif from './components/Gif'
 import Layout from './components/Layout'
+import {HeadBar} from "./components/Headbar";
 
 class App extends React.Component {
 
@@ -57,13 +57,13 @@ class App extends React.Component {
     }
 
     searchGifs = async () => {
-        const { searchedGif, offset, limit, loading } = this.state
+        const {searchedGif, offset, limit, loading} = this.state
         if (loading) {
             return
         }
         this.dispatchCommand(createParamsCommand(LOADING)(true))
         await sleep(3000)
-        const urls = await loadGifs({ query: searchedGif, limit, offset })
+        const urls = await loadGifs({query: searchedGif, limit, offset})
         this.dispatchCommand(createParamsCommand(SET_OFFSET)(offset + limit))
         this.dispatchCommand(createParamsCommand(LOADING)(false))
         this.dispatchCommand(createSetSearchedGifsCommand(urls))
@@ -79,18 +79,14 @@ class App extends React.Component {
 
     onToggleColumns = () => {
         this.dispatchCommand(createToggleColumnSCommand(!this.state.isOneColumn))
-
     }
 
     render() {
-        const { urls, loading, searchedGif, isOneColumn } = processProps(this.state)
+        const {urls, loading, searchedGif, isOneColumn} = processProps(this.state)
+
         return (
             <div ref={this.container}>
-                <Input className='container' placeholder='Search for giffs...' onChange={this.onInputChange}
-                       value={searchedGif}/>
-                <button onClick={this.onStartSearchClick} disabled={isEmpty(searchedGif)}>Search</button>
-                <button className='toggle-test' onClick={this.onToggleColumns} disabled={isEmpty(urls)}>Toggle columns
-                </button>
+                <HeadBar searchedGif={searchedGif} urls={urls} {...this}/>
                 <Layout isLoading={loading} classname={toggleLayoutColumnClass(isOneColumn)}>
                     <Gif urls={urls}/>
                 </Layout>
