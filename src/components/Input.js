@@ -1,6 +1,5 @@
-import React from 'react';
+import React from 'react'
 
-
-export  const Input = ({onChange, ...rest})=>{
+export const Input = ({ onChange, ...rest }) => {
     return <input onChange={onChange} {...rest}/>
 }
