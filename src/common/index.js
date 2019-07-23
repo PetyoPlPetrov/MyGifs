@@ -19,7 +19,7 @@ export const handleCommand = (command) => (state, props) => {
         state
     )
 
-    return computed !== state ? computed : null
+    return computed
 }
 
 export const processProps = (props) =>
