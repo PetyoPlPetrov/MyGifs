@@ -62,7 +62,7 @@ class App extends  React.Component{
             return
         }
         this.dispatchCommand(createParamsCommand(LOADING)(true))
-        await sleep(0)
+        await sleep(4000)
         const urls = await loadGifs({query:searchedGif, limit, offset})
         this.dispatchCommand(createParamsCommand(SET_OFFSET)(offset+ limit))
         this.dispatchCommand(createParamsCommand(LOADING)(false))
