@@ -8,7 +8,7 @@ export const LayoutPlugin = {
     handleCommand: ( { command: {commandName, args}, state } ) => {
         switch (commandName) {
             case TOGGLE_COLUMNS: {
-                return {...state,columns: args, }
+                return {...state,isOneColumn: args, }
             }
             default :{
                 return state

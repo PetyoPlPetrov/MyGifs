@@ -5,6 +5,12 @@ import {
     SET_GIFS,
     TOGGLE_COLUMNS
 } from '../constants'
+import {
+    always,
+    cond,
+    equals,
+    T
+} from 'ramda'
 
 export const handleCommand = (command) => (state, props) => {
     const computed = plugins.reduce(
@@ -19,6 +25,11 @@ export const handleCommand = (command) => (state, props) => {
 export const processProps = (props) =>
     plugins.reduce((newProps, plugin) => plugin.transformStateProps(newProps), props)
 
+export const toggleLayoutColumnClass = cond([
+    [equals(true), always('threeColumnsContainer')],
+    [T, always('oneColumnContainer')],
+
+])
 export const createSetSearchedGifsCommand = (args) => ({
     commandName: SET_GIFS,
     args

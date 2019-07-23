@@ -11,7 +11,8 @@ import {
     processProps,
     createSetSearchedGifsCommand,
     createResetGifsCommand,
-    createToggleColumnSCommand
+    createToggleColumnSCommand,
+    toggleLayoutColumnClass
 } from './common/'
 import { Input } from './components/Input'
 import {
@@ -19,6 +20,7 @@ import {
     sleep
 } from './fetch'
 import Gif from './components/Gif'
+import Layout from './components/Layout'
 
 class App extends React.Component {
 
@@ -29,10 +31,9 @@ class App extends React.Component {
             urls: [],
             offset: 1,
             limit: 16,
-            columns: false
+            isOneColumn: false
         }
         this.container = React.createRef()
-        this.dispatchCommand = this.dispatchCommand.bind(this)
     }
 
     componentDidMount() {
@@ -68,7 +69,7 @@ class App extends React.Component {
         this.dispatchCommand(createSetSearchedGifsCommand(urls))
     }
 
-    dispatchCommand(command) {
+    dispatchCommand = (command) => {
         this.setState(handleCommand(command))
     }
 
@@ -77,19 +78,22 @@ class App extends React.Component {
     }
 
     onToggleColumns = () => {
-        this.dispatchCommand(createToggleColumnSCommand(!this.state.columns))
+        this.dispatchCommand(createToggleColumnSCommand(!this.state.isOneColumn))
 
     }
 
     render() {
-        const { urls, loading, searchedGif, columns } = processProps(this.state)
+        const { urls, loading, searchedGif, isOneColumn } = processProps(this.state)
         return (
             <div ref={this.container}>
                 <Input className='container' placeholder='Search for giffs...' onChange={this.onInputChange}
                        value={searchedGif}/>
                 <button onClick={this.onStartSearchClick} disabled={isEmpty(searchedGif)}>Search</button>
-                <button onClick={this.onToggleColumns} disabled={isEmpty(urls)}>Toggle columns</button>
-                <Gif urls={urls} isLoading={loading} columns={columns}/>
+                <button className='toggle-test' onClick={this.onToggleColumns} disabled={isEmpty(urls)}>Toggle columns
+                </button>
+                <Layout isLoading={loading} classname={toggleLayoutColumnClass(isOneColumn)}>
+                    <Gif urls={urls}/>
+                </Layout>
             </div>)
     }
 }

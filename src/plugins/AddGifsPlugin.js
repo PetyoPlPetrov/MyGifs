@@ -20,6 +20,7 @@ const mapProperties = mapDeepPath({
     title: ['title'],
     url: ['images', 'preview_gif', 'url'],
 })
+
 const mapUrlToGifs = ({ urls, ...rest }) => compose(mergeDeepRight(rest), objOf('urls'), map(mapProperties))(urls)
 
 const propsModifiers = [mapUrlToGifs]
