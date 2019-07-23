@@ -13,10 +13,10 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it('should call create command when giff is searched', ()=>{
+it('should call createInputChangeCommand when typing in search box', ()=>{
         const app =  mount(<App />)
-        const args = {"args": "", "commandName": "INPUT_CHANGE"}
-        const createcommand = jest.spyOn(app.instance(),'dispatchCommand' )
-        app.find('input').simulate('change')
-        expect(createcommand).toHaveBeenCalledWith(args)
+        const args = {"args": "dog", "commandName": "INPUT_CHANGE"}
+        const createInputChangeCommand = jest.spyOn(app.instance(),'dispatchCommand' )
+        app.find('input').simulate('change', {target: {value: 'dog'}})
+        expect(createInputChangeCommand).toHaveBeenCalledWith(args)
 })
