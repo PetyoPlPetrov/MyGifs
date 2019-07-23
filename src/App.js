@@ -62,7 +62,7 @@ class App extends  React.Component{
             return
         }
         this.dispatchCommand(createParamsCommand(LOADING)(true))
-        await sleep(4000)
+        await sleep(3000)
         const urls = await loadGifs({query:searchedGif, limit, offset})
         this.dispatchCommand(createParamsCommand(SET_OFFSET)(offset+ limit))
         this.dispatchCommand(createParamsCommand(LOADING)(false))
@@ -76,6 +76,7 @@ class App extends  React.Component{
     onInputChange = (e)=>{
         this.dispatchCommand(createInputChangeCommand(e.target.value))
     }
+
     onToggleColumns = ()=>{
         this.dispatchCommand(createToggleColumnSCommand(!this.state.columns))
 
