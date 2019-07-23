@@ -5,9 +5,11 @@ import {
     SET_OFFSET
 } from '../constants/'
 
-const mapUrlToGifs = ({urls,...rest})=>({
-    ...rest,urls: urls.map(e => ({title: e.title,url: e.images.preview_gif.url}))
-})
+const mapUrlToGifs = ({urls,...rest})=>{
+    return {
+        ...rest,urls: urls.map(e => ({title: e.title,url: e.images.preview_gif.url}))
+    }
+}
 
 const propsModifiers = [mapUrlToGifs]
 

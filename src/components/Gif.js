@@ -1,10 +1,14 @@
 import React from 'react';
-import { memoizeWith, toString} from 'ramda'
+import { memoizeWith, toString, cond, equals, always,T} from 'ramda'
 import { withLoader } from './withLoader'
 
+const generateGiffClassnames = cond([
+    [equals(true), always('threeColumnsContainer')],
+    [T, always('oneColumnContainer')],
 
-const Gif = memoizeWith((url)=>toString(url),({urls,title, ...rest})=>{
-    return  <div className={'container'} style={{border: 2, color: 'red', paddingLeft:100, paddingTop: 100}}>
+])
+const Gif = memoizeWith((url)=>toString(url),({urls,title,columns, ...rest})=>{
+    return  <div className={generateGiffClassnames(columns)} style={{paddingLeft:100, paddingTop: 100}}>
         {urls.map(e=><div className={'pic'} key={e.url}><img alt={title} src={e.url} title={title} {...rest}/></div>)}
     </div>
 })

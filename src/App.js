@@ -10,10 +10,14 @@ import {
     handleCommand,
     processProps,
     createSetSearchedGifsCommand,
-    createResetGifsCommand
+    createResetGifsCommand,
+    createToggleColumnSCommand
 } from './common/'
 import { Input} from './components/Input'
-import { loadGifs } from './fetch'
+import {
+    loadGifs,
+    sleep
+} from './fetch'
 import Gif from './components/Gif'
 
 class App extends  React.Component{
@@ -24,7 +28,8 @@ class App extends  React.Component{
             searchedGif: '',
             urls: [],
             offset:1,
-            limit:16
+            limit:16,
+            columns:false
         }
         this.container =  React.createRef();
         this.dispatchCommand=this.dispatchCommand.bind(this)
@@ -57,6 +62,7 @@ class App extends  React.Component{
             return
         }
         this.dispatchCommand(createParamsCommand(LOADING)(true))
+        await sleep(0)
         const urls = await loadGifs({query:searchedGif, limit, offset})
         this.dispatchCommand(createParamsCommand(SET_OFFSET)(offset+ limit))
         this.dispatchCommand(createParamsCommand(LOADING)(false))
@@ -70,14 +76,19 @@ class App extends  React.Component{
     onInputChange = (e)=>{
         this.dispatchCommand(createInputChangeCommand(e.target.value))
     }
+    onToggleColumns = ()=>{
+        this.dispatchCommand(createToggleColumnSCommand(!this.state.columns))
+
+    }
 
     render(){
-        const { urls, loading, searchedGif} = processProps(this.state)
+        const { urls, loading, searchedGif, columns} = processProps(this.state)
         return(
             <div style={{paddingLeft:200,paddingTop:100}} ref={this.container}>
             <Input placeholder='Search for giffs...' onChange={this.onInputChange} value={searchedGif}/>
             <button onClick={this.onStartSearchClick} disabled={isEmpty(searchedGif)}>Search</button>
-            <Gif urls={urls} isLoading={loading}/>
+            <button onClick={this.onToggleColumns} disabled={isEmpty(urls)}>Toggle columns</button>
+            <Gif urls={urls} isLoading={loading} columns={columns}/>
         </div>)
     }
 }

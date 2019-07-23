@@ -2,7 +2,8 @@ import { plugins } from '../plugins/'
 import {
     INPUT_CHANGE,
     RESET_GIFS,
-    SET_GIFS
+    SET_GIFS,
+    TOGGLE_COLUMNS
 } from '../constants'
 
 export const handleCommand = (command )=> (state,props) => {
@@ -32,7 +33,12 @@ export const createInputChangeCommand = (args) => ({
     args
 })
 
-export const createParamsCommand = commandName=> (args) => ({
+export const createParamsCommand = commandName => (args) => ({
     commandName,
+    args
+})
+
+export const createToggleColumnSCommand = (args) => ({
+    commandName: TOGGLE_COLUMNS,
     args
 })
