@@ -1,6 +1,6 @@
 # MyGifs
 
-This repository will present giff search application. The boilerplate is create-react-app.
+This repository will present a giff search application. The boilerplate is create-react-app.
 
 ## Setting up the project
 
@@ -28,7 +28,6 @@ This repository will present giff search application. The boilerplate is create-
             - fetch - functions around async fetch functionality
             - plugins - the functionality is separated into plugiins
             - tests - components tests
-        - tests
 ```
 
 #### Commit Message Format
