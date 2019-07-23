@@ -48,8 +48,7 @@ Must be one of the following:
     Type in the input field and press search button. When you scroll to the bottom a a text with loading purpose will
 signal the new giffs are loading. There is a 3secs additional delay on top of the async request in order to enjoy
 the "loader"
-    Currents bugs: since the default limit of giffs the app show is 8, if the giffs are small
- the scroll will not show. Just press Search button again to load diffrent giffs.
+
 ## Authors
 
 - **Petyo Petrov**

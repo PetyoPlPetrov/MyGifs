@@ -6,5 +6,11 @@ body{
 
 .container {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 150px;
+}
+.pic {
+    width: 50px;
+    margin: 5px;
 }

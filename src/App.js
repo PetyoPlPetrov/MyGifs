@@ -25,7 +25,7 @@ class App extends  React.Component{
             searchedGif: '',
             urls: [],
             offset:1,
-            limit:8
+            limit:16
         }
         this.container =  React.createRef();
     }
