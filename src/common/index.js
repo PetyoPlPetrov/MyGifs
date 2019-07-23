@@ -6,7 +6,7 @@ import {
     TOGGLE_COLUMNS
 } from '../constants'
 
-export const handleCommand = (command )=> (state,props) => {
+export const handleCommand = (command) => (state, props) => {
     const computed = plugins.reduce(
         (nextState, plugin) =>
             plugin.handleCommand({ command, state: nextState, props }),

@@ -5,12 +5,12 @@ import {
 const propsModifiers = []
 
 export const SearchBoxPlugin = {
-    handleCommand: ( { command: {commandName, args}, state } ) => {
+    handleCommand: ({ command: { commandName, args }, state }) => {
         switch (commandName) {
             case INPUT_CHANGE: {
-                return {...state,searchedGif: args, }
+                return { ...state, searchedGif: args, }
             }
-            default :{
+            default : {
                 return state
             }
         }
