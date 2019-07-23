@@ -4,7 +4,7 @@ This repository will present giff search application. The boilerplate is create-
 
 ## Setting up the project
 
-1. Clone the repository
+1. Clone the repository on master branch(it is the default one)
 
    - the library source code is located into `src` folder
 
@@ -13,8 +13,6 @@ This repository will present giff search application. The boilerplate is create-
 
 1. To **build the package** execute `npm run build`
 1. To **run the tests** execute `npm test`
-
-
 1. To **start the app** - `npm start`
 
 ## Project structure
@@ -44,8 +42,8 @@ Must be one of the following:
 - **refactor**: A code change that neither fixes a bug nor adds a feature
 - **test**: Adding missing or correcting existing tests
 
-##Documentation
-    Type in the input field and press search button. When you scroll to the bottom a a text with loading purpose will
+## Documentation
+  Type in the input field and press search button. When you scroll to the bottom a a text with loading purpose will
 signal the new giffs are loading. There is a 3secs additional delay on top of the async request in order to enjoy
 the "loader"
 
