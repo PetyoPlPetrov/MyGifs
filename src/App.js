@@ -25,9 +25,10 @@ class App extends  React.Component{
             searchedGif: '',
             urls: [],
             offset:1,
-            limit:8
+            limit:16
         }
         this.container =  React.createRef();
+        this.dispatchCommand=this.dispatchCommand.bind(this)
     }
 
     componentDidMount() {
@@ -63,7 +64,7 @@ class App extends  React.Component{
         this.dispatchCommand(createSetSearchedGifsCommand(urls))
     }
 
-    dispatchCommand = (command) => {
+    dispatchCommand (command) {
         this.setState(handleCommand(command))
     }
 
