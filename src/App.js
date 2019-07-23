@@ -1,5 +1,5 @@
 import React from 'react';
-import {isEmpty} from 'ramda'
+import {isEmpty } from 'ramda'
 import {
     LOADING,
     SET_OFFSET
@@ -56,7 +56,6 @@ class App extends  React.Component{
     }
 
     searchGifs = async () => {
-        //TODO compose them with ramda
         const {searchedGif, offset,limit, loading} = this.state
         if(loading){
             return
@@ -85,8 +84,8 @@ class App extends  React.Component{
     render(){
         const { urls, loading, searchedGif, columns} = processProps(this.state)
         return(
-            <div style={{paddingLeft:200,paddingTop:100}} ref={this.container}>
-            <Input placeholder='Search for giffs...' onChange={this.onInputChange} value={searchedGif}/>
+            <div  ref={this.container}>
+            <Input className='container' placeholder='Search for giffs...' onChange={this.onInputChange} value={searchedGif}/>
             <button onClick={this.onStartSearchClick} disabled={isEmpty(searchedGif)}>Search</button>
             <button onClick={this.onToggleColumns} disabled={isEmpty(urls)}>Toggle columns</button>
             <Gif urls={urls} isLoading={loading} columns={columns}/>

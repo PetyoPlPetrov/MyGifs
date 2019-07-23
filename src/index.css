@@ -1,6 +1,10 @@
 body{
     overflow-y:scroll;
 }
+.container{
+    margin-left: 35%;
+    margin-top: 5%;
+}
 
 
 
@@ -10,12 +14,16 @@ body{
     grid-auto-rows: 200px;
     grid-gap: 15px;
     overflow: hidden;
+    margin: 5%;
 }
 
 .oneColumnContainer {
     display: grid;
     grid-template-rows: 400px;
     grid-gap: 15px;
+    margin-left:35%;
+    margin-top: 5%;
+
 }
 
 .pic {

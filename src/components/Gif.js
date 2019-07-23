@@ -7,8 +7,9 @@ const generateGiffClassnames = cond([
     [T, always('oneColumnContainer')],
 
 ])
+
 const Gif = memoizeWith((url)=>toString(url),({urls,title,columns, ...rest})=>{
-    return  <div className={generateGiffClassnames(columns)} style={{paddingLeft:100, paddingTop: 100}}>
+    return  <div className={generateGiffClassnames(columns)}>
         {urls.map(e=><div className={'pic'} key={e.url}><img alt={title} src={e.url} title={title} {...rest}/></div>)}
     </div>
 })
