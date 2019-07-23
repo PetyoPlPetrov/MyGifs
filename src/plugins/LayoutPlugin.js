@@ -1,16 +1,16 @@
 import {
-    INPUT_CHANGE,
+    TOGGLE_COLUMNS,
 } from '../constants/'
 
 const propsModifiers = []
 
-export const SearchBoxPlugin = {
-    handleCommand: ({ command: { commandName, args }, state }) => {
+export const LayoutPlugin = {
+    handleCommand: ( { command: {commandName, args}, state } ) => {
         switch (commandName) {
-            case INPUT_CHANGE: {
-                return { ...state, searchedGif: args, }
+            case TOGGLE_COLUMNS: {
+                return {...state,isOneColumn: args, }
             }
-            default : {
+            default :{
                 return state
             }
         }

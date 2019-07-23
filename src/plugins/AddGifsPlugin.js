@@ -1,13 +1,27 @@
 import {
+    mergeDeepRight,
+    objOf,
+    compose,
+    map,
+    lensPath,
+    view,
+    curry
+} from 'ramda'
+import {
     LOADING,
     RESET_GIFS,
     SET_GIFS,
     SET_OFFSET
 } from '../constants/'
 
-const mapUrlToGifs = ({urls,...rest})=>({
-    ...rest,urls: urls.map(e => ({title: e.title,url: e.images.preview_gif.url}))
+const mapDeepPath = curry((desc, obj) => map(path => view(lensPath(path), obj), desc))
+
+const mapProperties = mapDeepPath({
+    title: ['title'],
+    url: ['images', 'preview_gif', 'url'],
 })
+
+const mapUrlToGifs = ({ urls, ...rest }) => compose(mergeDeepRight(rest), objOf('urls'), map(mapProperties))(urls)
 
 const propsModifiers = [mapUrlToGifs]
 
@@ -15,18 +29,18 @@ export const AddGifs = {
     handleCommand: ({ command, state, }) => {
         switch (command.commandName) {
             case SET_GIFS: {
-                return {...state, urls: state.urls.concat(command.args)}
+                return { ...state, urls: state.urls.concat(command.args) }
             }
             case SET_OFFSET: {
-                return {...state, offset: command.args}
+                return { ...state, offset: command.args }
             }
             case LOADING: {
-                return {...state, loading: command.args}
+                return { ...state, loading: command.args }
             }
             case RESET_GIFS: {
-                return {...state, urls: []}
+                return { ...state, urls: [] }
             }
-            default :{
+            default : {
                 return state
             }
         }

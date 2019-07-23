@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-export  const withLoader = (WrappedComponent)=>{
-    return function ({isLoading,...props}) {
-        return (<div>
+export const withLoader = (WrappedComponent) => {
+    return function ({ isLoading, ...props }) {
+        return (<>
             <WrappedComponent {...props} />
-            {(isLoading) && <h1>Fetching the gifs for you(I am a 3 sec loader : ])...</h1>}
-        </div>);
+            {(isLoading) && <div className='loader'></div>}
+        </>)
     }
 }

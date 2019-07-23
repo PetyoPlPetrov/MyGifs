@@ -1,12 +1,15 @@
-import React from 'react';
-import { memoizeWith, toString} from 'ramda'
-import { withLoader } from './withLoader'
+import React from 'react'
+import {
+    memoizeWith,
+    toString,
+} from 'ramda'
 
 
-const Gif = memoizeWith((url)=>toString(url),({urls,title, ...rest})=>{
-    return  <div className={'container'} style={{border: 2, color: 'red', paddingLeft:100, paddingTop: 100}}>
-        {urls.map(e=><div className={'pic'} key={e.url}><img alt={title} src={e.url} title={title} {...rest}/></div>)}
-    </div>
+const Gif = memoizeWith((urls) => toString(urls), ({ urls, ...rest }) => {
+    return <>
+        {urls.map(e => <div className={'gif'} key={e.url}><img alt={e.title} src={e.url} title={e.title} {...rest}/>
+        </div>)}
+    </>
 })
 
-export default withLoader(Gif)
+export default (Gif)
