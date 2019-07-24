@@ -46,7 +46,7 @@ class App extends React.Component {
     }
 
     handleScroll = async () => {
-        const isScrolledtoTheBottom = this.container.current.getBoundingClientRect().bottom <= window.innerHeight
+        const isScrolledtoTheBottom = this.container.current.getBoundingClientRect().bottom - 1 <= window.innerHeight
         if (isScrolledtoTheBottom) {
             await this.searchGifs()
         }
