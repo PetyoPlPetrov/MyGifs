@@ -12,9 +12,8 @@
     display: grid;
     grid-template-rows: 400px;
     grid-gap: 15px;
-    margin-left:35%;
+    text-align: center;
     margin-top: 5%;
-
 }
 
 .gif {

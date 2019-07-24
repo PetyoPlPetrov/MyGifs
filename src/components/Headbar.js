@@ -15,7 +15,7 @@ export const HeadBar = ({ urls, searchedGif, onInputChange, onStartSearchClick, 
                    value={searchedGif}/>
             <div className='header-buttons'>
                 <Button color='primary' onClick={onStartSearchClick}
-                        disabled={isEmpty(searchedGif)}>Search!!</Button>
+                         disabled={isEmpty(searchedGif)}>Search!!</Button>
                 <Button color='secondary' className='toggle-test' onClick={onToggleColumns}
                         disabled={isEmpty(urls)}>Toggle columns
                 </Button>
