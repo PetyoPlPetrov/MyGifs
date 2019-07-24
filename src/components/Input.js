@@ -1,5 +1,6 @@
 import React from 'react'
+import {Input as RInput} from 'reactstrap'
 
-export const Input = ({ onChange, ...rest }) => {
-    return <input onChange={onChange} {...rest}/>
+export const Input = ({onChange, ...rest}) => {
+    return <RInput onChange={onChange} {...rest}/>
 }

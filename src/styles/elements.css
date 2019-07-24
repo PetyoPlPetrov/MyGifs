@@ -1,0 +1,20 @@
+body{
+    overflow-y:scroll;
+}
+
+.header, .header-buttons{
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.header-buttons{
+    margin-left: 1em;
+}
+
+.header-buttons .btn{
+    margin-left: 0.5em;
+}
+.header-buttons .btn:first-child{
+    margin-left: 0;
+}

@@ -25,12 +25,13 @@ This repository will present a giff search application. The boilerplate is creat
         - public
             - html file
         - src
-            - common - common command functions
-            - components - main components
-            - constants - 
+            - common - common command functions and utils
+            - components
+            - constants
             - fetch - functions around async fetch functionality
             - plugins - the functionality is separated into plugiins
-            - tests - components tests
+            - tests
+            - styles
 ```
 
 #### Commit Message Format
