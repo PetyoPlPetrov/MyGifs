@@ -29,7 +29,7 @@ export const AddGifs = {
     handleCommand: ({ command, state, }) => {
         switch (command.commandName) {
             case SET_GIFS: {
-                return { ...state, urls: state.urls.concat(command.args) }
+                return { ...state, initialPageState: false, urls: state.urls.concat(command.args) }
             }
             case SET_OFFSET: {
                 return { ...state, offset: command.args }
@@ -38,7 +38,7 @@ export const AddGifs = {
                 return { ...state, loading: command.args }
             }
             case RESET_GIFS: {
-                return { ...state, urls: [] }
+                return { ...state, urls: [], initialPageState: true }
             }
             default : {
                 return state
