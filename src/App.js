@@ -20,7 +20,7 @@ import {
 } from './fetch'
 import Gif from './components/Gif'
 import Layout from './components/Layout'
-import {HeadBar} from "./components/Headbar";
+import { HeadBar } from './components/Headbar'
 
 class App extends React.Component {
 
@@ -31,7 +31,8 @@ class App extends React.Component {
             urls: [],
             offset: 1,
             limit: 16,
-            isOneColumn: false
+            isOneColumn: false,
+            initialPageState: true
         }
         this.container = React.createRef()
     }
@@ -57,13 +58,13 @@ class App extends React.Component {
     }
 
     searchGifs = async () => {
-        const {searchedGif, offset, limit, loading} = this.state
+        const { searchedGif, offset, limit, loading } = this.state
         if (loading) {
             return
         }
         this.dispatchCommand(createParamsCommand(LOADING)(true))
         await sleep(3000)
-        const urls = await loadGifs({query: searchedGif, limit, offset})
+        const urls = await loadGifs({ query: searchedGif, limit, offset })
         this.dispatchCommand(createParamsCommand(SET_OFFSET)(offset + limit))
         this.dispatchCommand(createParamsCommand(LOADING)(false))
         this.dispatchCommand(createSetSearchedGifsCommand(urls))
@@ -82,13 +83,13 @@ class App extends React.Component {
     }
 
     render() {
-        const {urls, loading, searchedGif, isOneColumn} = processProps(this.state)
+        const { urls, loading, searchedGif, isOneColumn, initialPageState } = processProps(this.state)
 
         return (
             <div ref={this.container}>
                 <HeadBar searchedGif={searchedGif} urls={urls} {...this}/>
                 <Layout isLoading={loading} classname={toggleLayoutColumnClass(isOneColumn)}>
-                    <Gif urls={urls}/>
+                    <Gif urls={urls} initialPageState={initialPageState}/>
                 </Layout>
             </div>)
     }
